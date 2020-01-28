@@ -26,13 +26,21 @@ module.exports = function(app) {
         
     });
     app.delete('/api/delete/:id', (req,res)=>{
+        let arrJson = []
         for(let i = 0; i < notesData.length; i++){
             if(notesData[i].title == req.params.id){
                 notesData.splice(i);
-                res.json(true);
+                // res.json(true);
             }
         }
-
+        arrJson = [...notesData];
+        fs.writeFile("./db/data.json", JSON.stringify(arrJson), 'utf8', function (err) {
+            if (err) {
+                   console.log("An error occured while writing JSON Object to File.");
+                   return console.log(err);
+               }
+           res.json(true);
+       });
         
     }); 
 }
