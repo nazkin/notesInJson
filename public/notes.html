@@ -40,8 +40,12 @@
             body: $("#body").val().trim()
         }
 
+        console.log(note);
         //Make  a post request with the note object to the api/post file
-
+        $.post("/api/add", note)
+            .then(data => {
+                console.log("note added successfully");
+            })
         //Clear the values
         $("#title").val("");
         $("#body").val("");

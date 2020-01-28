@@ -19,19 +19,33 @@
         </div>
         <a href="/notes" class="btn btn-outline-warning">New Note</a>
     </div>
-    <div class="container">
-      <div class="card">
-        <h1>Title</h1>
-        <h5>Body</h5>
-      </div>
+    <div id="notes-container" class="container">
+      
     </div>
 
       <script type = "text/javascript">
       //Call a get request api/notes and retrieve all my notes
+      
       $.ajax({ url: "/api/notes", method: "GET" })
           .then(notes => {
              //Within the callback we dynamically create out notes
              console.log(notes);
+             if(notes.length < 1){
+              $("#notes-container").append(
+                $("<h5>").text("No notes have been entered")
+              )
+             }
+
+             for(let i = 0; i < notes.length; i++){
+              var notesContainer = $("#notes-container");
+              var noteContainer = $('<div class="note my=2">')
+              noteContainer.append(
+                $("<h1>").text(`Title: ${notes[i].title}`),
+                $("<h5>").text(`--> ${notes[i].body}`), 
+                $("<button>").text("Delete")
+              )
+              notesContainer.append(noteContainer);
+             }
           })
        
 

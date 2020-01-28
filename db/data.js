@@ -1,13 +1,7 @@
-const fs = require('fs');
-
 
 
  const data = [
-    {
-        title: "Note Title",
-        body: "Note Body Note BodyNote BodyNote BodyNote BodyNote BodyNote BodyNote Body"
-       
-    }
+  
 ];
 module.exports = data;
 
