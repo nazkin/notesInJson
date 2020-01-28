@@ -42,11 +42,24 @@
               noteContainer.append(
                 $("<h1>").text(`Title: ${notes[i].title}`),
                 $("<h5>").text(`--> ${notes[i].body}`), 
-                $("<button>").text("Delete")
+                $("<button type = 'submit'>").text("Delete")
               )
               notesContainer.append(noteContainer);
              }
-          })
+          });
+
+          $("#notes-container").on('click', (event)=>{
+           
+              const title = event.target.previousSibling.previousSibling.textContent;
+              const id = title.substring(6).trim();
+              const domNote = event.target.previousSibling.previousSibling.parentElement;
+              domNote.remove();
+              $.ajax({ url: `/api/delete/${id}`, method: "DELETE" })
+                .then(() => { 
+                  console.log('Success');
+                  location.reload();
+                });
+          });
        
 
       </script>
